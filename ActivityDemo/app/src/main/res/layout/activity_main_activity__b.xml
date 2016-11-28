@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ccffcc"
+    tools:context="test.bawei.com.activitydemo.MainActivity_B">
+
+    <Button
+        android:id="@+id/sss"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="#ffccff"
+        android:text="这是 B 面" />
+</RelativeLayout>
