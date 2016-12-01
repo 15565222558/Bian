@@ -16,6 +16,7 @@ public class Main {
 		Main main = new Main();
 		main.getNum();
 		main.num();
+		// ------------------回文数---------------------------------------
 		int ok = 0;
 		for (long i = 10000; i < 100000; i++)
 			if (ishuiwen(i) == 1) {
@@ -23,12 +24,28 @@ public class Main {
 				System.out.println("回文数:" + i);
 			}
 		System.out.println(ok + "个相同的回文数");
-
+		// -------------二维数组--------------------------------------------
+		array();// 调用二维数组
+		// ----------------------杨辉三角-----------------------------------
+		triangle();// 杨辉三角
+		// -----------------------金字塔形杨辉三角行
+		// C(n+1,i)=C(n,i)+C(n,i-1)--行,列--------------------------------
+		int r = 6;
+		int[][] a = new int[r + 1][];
+		for (int i = 0; i <= r; i++) {
+			a[i] = new int[i + 1];
+		}
+		Yanghui(a, r);// 调
+		// ------------求1+2!+3!+...+20!(阶乘)的和---------------------------------------------
+		Num();
+		// ---------------------------------------------------------
 		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in); // 从控制台输入想要查看的月份
 		System.out.println("请输入你想要查看的月数:");// 输入提示
 		m = in.nextInt();// 输入的整数月份赋值给m
+		// --------------------斐波那契数列(兔子)-------------------------------------
 		fun(m);
+
 	}
 
 	/**
@@ -125,8 +142,8 @@ public class Main {
 	}
 
 	/**
-	 * 斐波那契数列（Fibonacci sequence），又称黄金分割数列.
-	 *  斐波那契—卢卡斯数列, 每一项都等于前两项之和f(n) = f(n-1)+ f(n-2） ....n>2
+	 * 斐波那契数列（Fibonacci sequence），又称黄金分割数列. 斐波那契—卢卡斯数列, 每一项都等于前两项之和f(n) =
+	 * f(n-1)+ f(n-2） ....n>2
 	 * 有一对兔子，从出生后第3个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，假如兔子都不死，问每个月的兔子总数为多少？
 	 */
 	public static void fun(int tu) {
@@ -155,4 +172,90 @@ public class Main {
 		}
 	}
 
+	/**
+	 * 二维数组遍历
+	 */
+	public static void array() {
+		// int[][] in=new int[5][5];
+		// for (int i = 0; i < 5; i++) {
+		// for (int j = 0; j < 5; j++) {
+		// in[i][j] =i+j;
+		// System.out.println(in[i][j]);
+		// }
+		// }
+		int[][] in = { { 1, 2, 3, 4, 5 }, { 1, 2, 3, 4, 5 } };
+		for (int i = 0; i < in.length; i++) {
+			for (int j = 0; j < in[i].length; j++) {
+				System.out.println(in[i][j]);
+			}
+		}
+
+	}
+
+	/**
+	 * 杨辉三角形 打印出杨辉三角形（要求打印出10行以上） 找行找列 根据公式套 去实现 公式:C(n+1,i)=C(n,i)+C(n,i-1)
+	 */
+	public static void triangle() {
+		int triangle[][] = new int[10][];// 创建二维数组
+		// 遍历二维数组的第一层
+		for (int i = 0; i < triangle.length; i++) {
+			triangle[i] = new int[i + 1];// 初始化第二层数组的大小
+			// 遍历第二层数组
+			for (int j = 0; j <= i; j++) {
+				// 将两侧的数组元素赋值为1
+				if (i == 0 || j == 0 || j == i) {
+					triangle[i][j] = 1;
+				} else {// 其他数值通过公式计算
+					triangle[i][j] = triangle[i - 1][j]
+							+ triangle[i - 1][j - 1];
+				}
+				System.out.print(triangle[i][j] + "\t"); // 输出数组元素
+			}
+			System.out.println(); // 换行
+		}
+	}
+
+	/**
+	 * 金字塔形杨辉三角行 C(n+1,i)=C(n,i)+C(n,i-1)--行,列
+	 * 
+	 * @param a
+	 * @param r
+	 */
+	public static void Yanghui(int a[][], int r) {
+		for (int i = 0; i <= r; i++) {
+			for (int j = 0; j < a[i].length; j++) {
+				if (i == 0 || j == 0 || j == a[i].length - 1)
+					a[i][j] = 1;
+				else
+					a[i][j] = a[i - 1][j - 1] + a[i - 1][j];
+
+			}
+		}
+		for (int i = 0; i <= r; i++) {
+			for (int j = r - i; j > 0; j--)
+				System.out.print(" ");
+			for (int j = 0; j < a[i].length; j++) {
+				System.out.print(a[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+
+	/**
+	 * 求1+2!+3!+...+20!的和 阶乘
+	 */
+	public static void Num() {
+		int i = 1, j = 1;
+		int s = 1, m = 0;
+		for (j = 1; j <= 20; j++) {
+			for (i = 1; i <= j; i++) {
+				s *= i;
+			}// 求阶乘
+			m += s;// 求和
+			s = 1;
+		}
+		System.out.println("1+2!+3!+...+20!=" + m);
+
+		// System.out.println("1+2!+...+20!="+sum);//打印结果
+	}
 }
